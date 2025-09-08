@@ -19,8 +19,10 @@ with DAG(
     start_date = pendulum.datetime(2025, 9, 10, 4, 35),
     schedule="35 4 * * *",  # diariamente 04:35
     catchup = False,
-) as dag: 
+    tags = ["banvic"],
+) as dag:
     
+
 
 
 # [TASKS]
