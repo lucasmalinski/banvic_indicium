@@ -30,7 +30,7 @@ with DAG(
     extrair_csv = DockerOperator(
         task_id = "extrair_csv",
         image="meltano/meltano:latest",
-        command="meltano run tap-csv target-local-csv",
+        command="meltano run tap-csv target-csv",
         auto_remove=True,
 
     )
@@ -38,7 +38,7 @@ with DAG(
     extrair_sql = DockerOperator(
         task_id = "extrair_sql",
         image="meltano/meltano:latest",
-        command="meltano run tap-postgres target-local-csv",
+        command="meltano run tap-postgres target-csv",
         auto_remove=True,
 
     )
@@ -46,7 +46,7 @@ with DAG(
     carregar_dw = DockerOperator(
         task_id = "carregar_dw",
         image="meltano/meltano:latest",
-        command="meltano run target-local-csv target-postgres",
+        command="meltano run target-csv target-postgres",
         auto_remove=True,
 
     )
