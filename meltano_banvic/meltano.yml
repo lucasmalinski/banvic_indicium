@@ -12,13 +12,13 @@ plugins:
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
       csv_files_definition: extract/tap_csv_config.json
-  - name: tap-postgres
-    variant: meltanolabs
-    pip_url: meltanolabs-tap-postgres
   loaders:
-  - name: target-postgres
-    variant: meltanolabs
-    pip_url: meltanolabs-target-postgres
   - name: target-csv
     variant: meltanolabs
     pip_url: meltanolabs-target-csv
+  - name: target-csv-csv
+    inherit_from: target-csv
+    config:
+      destination_path: load/data/csv
+  - name: target-sql-csv
+    inherit_from: target-csv
