@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-docker run --rm \
+docker run \
     -u $(id -u):$(id -g) \
     -e HOME=/projects \
     -v "$(pwd)":/projects \
