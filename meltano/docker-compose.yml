@@ -1,0 +1,10 @@
+x-meltano-image: &meltano-image
+  image: meltano/meltano
+  volumes:
+    - .:/project
+
+services:
+  meltano:
+    <<: *meltano-image
+    command: dragon
+    restart: unless-stopped
