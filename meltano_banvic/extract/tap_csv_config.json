@@ -1,0 +1,7 @@
+[
+  {
+    "entity": "transacoes",
+    "path": "extract/data/transacoes.csv",
+    "keys": ["cod_transacao"]
+  }
+]
