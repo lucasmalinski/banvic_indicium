@@ -19,6 +19,12 @@ plugins:
   - name: target-csv-csv
     inherit_from: target-csv
     config:
-      destination_path: load/data/csv
+      destination_path: load/data/
+      # 2025-09-09/csv/transacoes.csv
+      file_naming_scheme: '{datestamp}/csv/{stream_name}.csv'
   - name: target-sql-csv
     inherit_from: target-csv
+    config:
+      destination_path: load/data/
+      # 2025-09-09/postgresql/banvic.sql
+      file_naming_scheme: '{datestamp}/sql/{stream_name}.sql'
