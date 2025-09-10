@@ -4,8 +4,8 @@ services:
     container_name: data-warehouse # Adicionado para persistir o nome do container do compose original.
     environment:
       POSTGRES_DB: data_warehouse
-      POSTGRES_USER: indicium
-      POSTGRES_PASSWORD: ev3n$ekurErp@ssw0rd
+      POSTGRES_USER: lucasmalinski
+      POSTGRES_PASSWORD: lucasmalinski
     volumes:
     # Montar volume local p/ persistir dados do PostgreSQL
       - ./dwdata:/var/lib/postgresql/data
