@@ -7,8 +7,8 @@ services:
       POSTGRES_USER: indicium
       POSTGRES_PASSWORD: ev3n$ekurErp@ssw0rd
     volumes:
+    # Montar volume local p/ persistir dados do PostgreSQL
       - ./dwdata:/var/lib/postgresql/data
-      - ./banvic.sql:/docker-entrypoint-initdb.d/banvic.sql
     ports:
       - 65432:5432
     networks:
