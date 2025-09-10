@@ -12,6 +12,11 @@ plugins:
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
       csv_files_definition: extract/tap_csv_config.json
+  - name: tap-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-tap-postgres
+    config:
+      sqlalchemy_url: postgresql://data_engineer:v3rysecur%26pas5w0rd@db:5432/banvic
   loaders:
   - name: target-csv
     variant: meltanolabs
