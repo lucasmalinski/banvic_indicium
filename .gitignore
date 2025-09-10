@@ -1,3 +1,6 @@
-meltano/venv
-meltano/.meltano
-meltano/.env
+meltano_banvic/venv
+meltano_banvic/.meltano
+meltano_banvic/.env
+meltano_banvic/load/data
+meltano/banvic/extract/data
+orientacoes.md
