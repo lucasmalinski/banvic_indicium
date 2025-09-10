@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:16
+    container_name: data-warehouse # Adicionado para persistir o nome do container do compose original.
+    environment:
+      POSTGRES_DB: data_warehouse
+      POSTGRES_USER: indicium
+      POSTGRES_PASSWORD: ev3n$ekurErp@ssw0rd
+    volumes:
+      - ./dwdata:/var/lib/postgresql/data
+      - ./banvic.sql:/docker-entrypoint-initdb.d/banvic.sql
+    ports:
+      - 65432:5432
+    networks:
+      - banvicnet
+networks:
+  banvicnet:
+    name: banvicnet
+    external: true
