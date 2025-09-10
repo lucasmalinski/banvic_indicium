@@ -1,0 +1,54 @@
+x-meltano-image: &meltano-image
+  image: meltano-demo-project:dev # Change me to a name and tag that makes sense for your project
+  build: .
+
+x-meltano-env: &meltano-env
+  MELTANO_DATABASE_URI: postgresql://postgres:postgres@meltano-system-db/meltano
+
+
+services:
+  meltano:
+    <<: *meltano-image
+    command: dragon
+    environment:
+      <<: *meltano-env
+
+
+    volumes:
+      - meltano_elt_logs_data:/project/.meltano/logs/elt
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    depends_on:
+      - meltano-system-db
+    networks:
+      - meltano
+    restart: unless-stopped
+
+  meltano-system-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres 
+      POSTGRES_DB: meltano
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - meltano_postgresql_data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    networks:
+      - meltano
+      - banvicnet
+    restart: unless-stopped
+
+  
+networks:
+  meltano:
+  banvicnet:
+    external: true
+
+volumes:
+  meltano_postgresql_data:
+    driver: local
+  meltano_elt_logs_data:
+    driver: local
