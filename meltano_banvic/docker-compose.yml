@@ -28,6 +28,7 @@ services:
     networks:
       - meltano
       - banvicnet
+      - indicium
     restart: unless-stopped
 
   meltano-system-db:
@@ -49,8 +50,9 @@ services:
 networks:
   meltano:
   banvicnet:
-    name: banvicnet
-    external: true
+    external: true # LINKA MELTANO AO POSTGRE DO BANVIC
+  indicium: 
+    external: true # LINKA MELTANO AO POSTGRE DO WAREHOUSE(INDICIUM)
 
 volumes:
   meltano_postgresql_data:
