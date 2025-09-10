@@ -8,6 +8,7 @@ x-meltano-env: &meltano-env
 
 services:
   meltano:
+    container_name: meltano # Persistir nome do container
     <<: *meltano-image
     command: dragon
     environment:
@@ -16,6 +17,8 @@ services:
 
     volumes:
       - meltano_elt_logs_data:/project/.meltano/logs/elt
+      - ./load/data:/project/load/data
+      - ./extract/data:/project/extract/data
     expose:
       - 5000
     ports:
@@ -24,9 +27,11 @@ services:
       - meltano-system-db
     networks:
       - meltano
+      - banvicnet
     restart: unless-stopped
 
   meltano-system-db:
+    container_name: meltano-system-db # Persistir nome do container
     image: postgres
     environment:
       POSTGRES_PASSWORD: postgres 
@@ -38,13 +43,13 @@ services:
       - 5432
     networks:
       - meltano
-      - banvicnet
     restart: unless-stopped
 
   
 networks:
   meltano:
   banvicnet:
+    name: banvicnet
     external: true
 
 volumes:
@@ -52,3 +57,4 @@ volumes:
     driver: local
   meltano_elt_logs_data:
     driver: local
+
