@@ -10,3 +10,7 @@ services:
       - ./banvic.sql:/docker-entrypoint-initdb.d/banvic.sql
     ports:
       - 55432:5432
+    networks:
+      - banvicnet
+networks:
+  banvicnet:
