@@ -7,33 +7,43 @@ environments:
 - name: prod
 plugins:
   extractors:
+  # EXTRATOR TRANSACOES.CSV
   - name: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
       # Configurações de extração do CSV 
       csv_files_definition: extract/tap_csv_config.json
+  # EXTRATOR BANVIC.SQL
   - name: tap-postgres
     variant: meltanolabs
     pip_url: meltanolabs-tap-postgres
     config:
       # Dados do postgres_banvic 
       sqlalchemy_url: postgresql://data_engineer:v3rysecur%26pas5w0rd@db:5432/banvic
-      filter_schemas: 
-       - public
+      filter_schemas:
+      - public
   loaders:
   - name: target-csv
     variant: meltanolabs
     pip_url: meltanolabs-target-csv
+  # (transacoes.csv -> *.csv)
   - name: target-csv-csv
     inherit_from: target-csv
     config:
       destination_path: load/data/
       # 2025-09-09/csv/transacoes.csv
       file_naming_scheme: '{datestamp}/csv/{stream_name}.csv'
+  # (banvic.sql-> *.csv)
   - name: target-sql-csv
     inherit_from: target-csv
     config:
       destination_path: load/data/
       # 2025-09-09/postgresql/banvic.sql
       file_naming_scheme: '{datestamp}/sql/{stream_name}.sql'
+  
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-target-postgres
+    config:
+      sqlalchemy_url: postgresql://lucasmalinski:lucasmalinski@data-warehouse:5432/data_warehouse
