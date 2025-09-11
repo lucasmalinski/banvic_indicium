@@ -14,7 +14,10 @@ plugins:
   - name: tap-transacoes 
     inherit_from: tap-csv
     config:
-      csv_files_definition: "extract/tap_transacoes.json"
+      files:
+        - entity: "transacoes"
+          path: "extract/data/transacoes.csv"
+          keys: ["cod_transacao"]
   - name: tap-datalake
     inherit_from: tap-csv
     config:
