@@ -4,10 +4,6 @@ from airflow.providers.docker.operators.docker import DockerOperator
 from airflow import DAG
 
 
-# [VARIÁVEIS GLOBAIS DA DAG]
-# Padrão em todos operadores caso variáveis não sejam sobrescritas na definição da tarefa.
-
-
 default_args ={
     "depends_on_past": False,
     "retries": 1,
@@ -22,15 +18,12 @@ with DAG(
     tags = ["banvic"],
 ) as dag:
     
-
-
-
 # [TASKS]
 
     extrair_csv = DockerOperator(
         task_id = "extrair_csv",
         image="meltano/meltano:latest",
-        command="meltano run tap-csv target-csv",
+        command="meltano run tap-csv target-csv-csv",
         auto_remove=True,
 
     )
@@ -38,7 +31,7 @@ with DAG(
     extrair_sql = DockerOperator(
         task_id = "extrair_sql",
         image="meltano/meltano:latest",
-        command="meltano run tap-postgres target-csv",
+        command="meltano run tap-postgres target-sql-csv",
         auto_remove=True,
 
     )
@@ -46,7 +39,7 @@ with DAG(
     carregar_dw = DockerOperator(
         task_id = "carregar_dw",
         image="meltano/meltano:latest",
-        command="meltano run target-csv target-postgres",
+        command="meltano run tap-datalake target-postgres",
         auto_remove=True,
 
     )
