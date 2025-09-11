@@ -12,8 +12,8 @@ default_args ={
 with DAG(
     dag_id="banvic_pipeline",
     default_args=default_args,
-    start_date=pendulum.datetime(2025, 9, 9, tz="UTC"),
-    schedule="35 4 * * *",
+    start_date=pendulum.datetime(2025, 9, 9, tz="America/"),
+    schedule="35 4 * * *",  # diariamente 04:35
     catchup=False,
     tags=["banvic"],
 ) as dag:
