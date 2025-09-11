@@ -1,5 +1,5 @@
 services:
-  db:
+  data-warehouse:
     image: postgres:16
     container_name: data-warehouse # Adicionado para persistir o nome do container do compose original.
     environment:
@@ -12,8 +12,7 @@ services:
     ports:
       - 65432:5432
     networks:
-      - banvicnet
+      - indicium
 networks:
-  banvicnet:
-    name: banvicnet
-    external: true
+  indicium:
+    name: indicium
