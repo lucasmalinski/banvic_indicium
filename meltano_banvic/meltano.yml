@@ -12,17 +12,11 @@ plugins:
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
-      # Aponta para transacoes.csv
-      files:
-        - entity: "transacoes"
-          path: "extract/data/transacoes.csv"
-          keys: ["cod_transacao"]
+      csv_files_definition: "tap_csv.json"
   - name: tap-datalake
     inherit_from: tap-csv
     config:
-      files:
-        - entity: "datalake"
-          path: "load/data"
+      csv_files_definition: "tap_datalake.json"
   - name: tap-postgres
     variant: meltanolabs
     pip_url: meltanolabs-tap-postgres
