@@ -11,12 +11,35 @@ plugins:
   - name: tap-csv
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+  - name: tap-transacoes 
+    inherit_from: tap-csv
     config:
-      csv_files_definition: "tap_csv.json"
+      csv_files_definition: "extract/tap_transacoes.json"
   - name: tap-datalake
     inherit_from: tap-csv
     config:
-      csv_files_definition: "tap_datalake.json"
+      files:
+        - entity: "transacoes"
+          path: load/data/latest/transacoes.csv
+          keys: ["cod_transacao"]
+        - entity: "agencias"
+          path: load/data/latest/public-agencias.csv
+          keys: ["cod_agencia"]
+        - entity: "clientes"
+          path: load/data/latest/public-clientes.csv
+          keys: ["cod_cliente"]
+        - entity: "colaborador_agencia"
+          path: "load/data/latest/public-colaborador_agencia.csv"
+          keys: ["cod_colaborador"]
+        - entity: "colaboradores"
+          path: "load/data/latest/public-colaboradores.csv"
+          keys: ["cod_colaborador"]
+        - entity: "contas"
+          path: "load/data/latest/public-contas.csv"
+          keys: ["num_conta"]
+        - entity: "propostas_credito"
+          path: "load/data/latest/public-propostas_credito.csv"
+          keys: ["cod_proposta"]
   - name: tap-postgres
     variant: meltanolabs
     pip_url: meltanolabs-tap-postgres
@@ -29,13 +52,19 @@ plugins:
   - name: target-csv
     variant: meltanolabs
     pip_url: meltanolabs-target-csv
-  - name: target-csv-csv
+  - name: target-csv-folder
     inherit_from: target-csv
     config:
       destination_path: load/data/
       # 2025-09-09/csv/transacoes.csv
       file_naming_scheme: '{datestamp}/csv/{stream_name}.csv'
-  - name: target-sql-csv
+  - name: target-datalake
+    inherit_from: target-csv
+    config:
+      destination_path: load/data/
+      # 2025-09-09/csv/transacoes.csv
+      file_naming_scheme: 'latest/{stream_name}.csv'
+  - name: target-sql-folder
     inherit_from: target-csv
     config:
       destination_path: load/data/
@@ -46,4 +75,7 @@ plugins:
     pip_url: meltanolabs-target-postgres
     config:
       sqlalchemy_url: postgresql://lucasmalinski:lucasmalinski@data-warehouse:5432/data_warehouse
-      schema: public
+      schema: banvic
+      activate_version: false
+      
+      add_record_metadata: false
