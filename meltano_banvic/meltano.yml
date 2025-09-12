@@ -80,5 +80,4 @@ plugins:
       sqlalchemy_url: postgresql://lucasmalinski:lucasmalinski@data-warehouse:5432/data_warehouse
       schema: banvic
       activate_version: false
-      
       add_record_metadata: false

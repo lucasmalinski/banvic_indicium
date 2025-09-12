@@ -5,6 +5,9 @@ set -e
 mkdir -p airflow/dags airflow/logs airflow/plugins airflow/config
 echo -e "AIRFLOW_UID=$(id -u)" > airflow/.env
 echo -e "AIRFLOW_UID=$(id -u)" > .env
+# Grupo Airflow - Docker 
+echo "DOCKER_GID=$(stat -c %g /var/run/docker.sock)" >> airflow/.env
+echo "DOCKER_GID=$(stat -c %g /var/run/docker.sock)" >> .env
 
 # POSTGRES - Banvic
 

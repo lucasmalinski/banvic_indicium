@@ -23,39 +23,44 @@ with DAG(
     extrair_csv = DockerOperator(
         task_id = "extrair_csv",
         image="meltano-banvic:latest",
-        command="meltano run tap-transacoes target-pasta-csv",
+        command="run tap-transacoes target-pasta-csv",
         auto_remove="force",
+        mount_tmp_dir=False
     )
 
     extrair_sql = DockerOperator(
         task_id = "extrair_sql",
         image="meltano-banvic:latest",
-        command="meltano run tap-postgres target-pasta-sql",
+        command="run tap-postgres target-pasta-sql",
         auto_remove="force",
-        network_mode="banvicnet"
+        network_mode="banvicnet",
+        mount_tmp_dir=False
     )
 
     carregar_csv_datalake = DockerOperator(
         task_id = "carregar_csv_datalake",
         image="meltano-banvic:latest",
-        command="meltano run tap-transacoes target-datalake",
+        command="run tap-transacoes target-datalake",
         auto_remove="force",
+        mount_tmp_dir=False
     )    
 
     carregar_sql_datalake = DockerOperator(
         task_id = "carregar_sql_datalake",
         image="meltano-banvic:latest",
-        command="meltano run tap-postgres target-datalake",
+        command="run tap-postgres target-datalake",
         auto_remove="force",
-        network_mode="banvicnet"
+        network_mode="banvicnet",
+        mount_tmp_dir=False
     )    
 
     carregar_warehouse = DockerOperator(
         task_id = "carregar_dw",
         image="meltano-banvic:latest",
-        command="meltano run tap-datalake target-postgres",
+        command="run tap-datalake target-postgres",
         auto_remove="force",
-        network_mode="indicium"
+        network_mode="indicium",
+        mount_tmp_dir=False
     )
 
     # Extrações
