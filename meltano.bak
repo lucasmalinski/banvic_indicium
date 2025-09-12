@@ -1,0 +1,83 @@
+version: 1
+default_environment: dev
+project_id: 01992f5a-a1d6-716c-9845-44c1910dde2a
+environments:
+- name: dev
+- name: staging
+- name: prod
+plugins:
+  extractors:
+
+  - name: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+  - name: tap-transacoes 
+    inherit_from: tap-csv
+    config:
+      files:
+        - entity: "transacoes"
+          path: "extract/data/transacoes.csv"
+          keys: ["cod_transacao"]
+  - name: tap-datalake
+    inherit_from: tap-csv
+    config:
+      files:
+        - entity: "transacoes"
+          path: load/data/latest/transacoes.csv
+          keys: ["cod_transacao"]
+        - entity: "agencias"
+          path: load/data/latest/public-agencias.csv
+          keys: ["cod_agencia"]
+        - entity: "clientes"
+          path: load/data/latest/public-clientes.csv
+          keys: ["cod_cliente"]
+        - entity: "colaborador_agencia"
+          path: "load/data/latest/public-colaborador_agencia.csv"
+          keys: ["cod_colaborador"]
+        - entity: "colaboradores"
+          path: "load/data/latest/public-colaboradores.csv"
+          keys: ["cod_colaborador"]
+        - entity: "contas"
+          path: "load/data/latest/public-contas.csv"
+          keys: ["num_conta"]
+        - entity: "propostas_credito"
+          path: "load/data/latest/public-propostas_credito.csv"
+          keys: ["cod_proposta"]
+  - name: tap-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-tap-postgres
+    config:
+      # Dados do postgres_banvic 
+      sqlalchemy_url: postgresql://data_engineer:v3rysecur%26pas5w0rd@db:5432/banvic
+      filter_schemas:
+      - public
+  loaders:
+  - name: target-csv
+    variant: meltanolabs
+    pip_url: meltanolabs-target-csv
+  - name: target-pasta-csv
+    inherit_from: target-csv
+    config:
+      destination_path: load/data/
+      # 2025-09-09/csv/transacoes.csv
+      file_naming_scheme: '{datestamp}/csv/{stream_name}.csv'
+  - name: target-datalake
+    inherit_from: target-csv
+    config:
+      destination_path: load/data/
+      # 2025-09-09/csv/transacoes.csv
+      file_naming_scheme: 'latest/{stream_name}.csv'
+  - name: target-pasta-sql
+    inherit_from: target-csv
+    config:
+      destination_path: load/data/
+      # 2025-09-09/postgresql/banvic.sql
+      file_naming_scheme: '{datestamp}/sql/{stream_name}.csv'
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-target-postgres
+    config:
+      sqlalchemy_url: postgresql://lucasmalinski:lucasmalinski@data-warehouse:5432/data_warehouse
+      schema: banvic
+      activate_version: false
+      add_record_metadata: false

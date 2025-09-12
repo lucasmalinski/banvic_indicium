@@ -1,0 +1,4 @@
+{"timestamp":"2025-09-12T08:25:43.749808","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager"}
+{"timestamp":"2025-09-12T08:25:43.750085","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T08:25:43.750179","level":"error","event":"DAG not found during start up","dag_id":"indicium","bundle":"BundleInfo(name='dags-folder', version=None)","path":"indicium.py","logger":"task"}
+{"timestamp":"2025-09-12T08:25:43.757815Z","level":"warning","event":"Process exited abnormally","exit_code":1,"logger":"task"}

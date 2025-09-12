@@ -1,7 +1,6 @@
-meltano_banvic/venv
-meltano_banvic/.meltano
-meltano_banvic/.env
-meltano_banvic/load/data
+meltano/.meltano
+meltano/.env
+meltano/load/data
 meltano/banvic/extract/data
 orientacoes.md
 pipeline.sh
