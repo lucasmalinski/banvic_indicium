@@ -2,8 +2,6 @@ FROM apache/airflow:3.0.6
 
 USER airflow
 
-RUN python -m pip install --user pipx && \
-    python -m pipx ensurepath
+RUN pip install --no-cache-dir uv
 
-RUN python3 -m pipx install uv && \
-    uv tool install meltano
+RUN uv tool install meltano
