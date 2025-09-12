@@ -39,18 +39,25 @@ completar
 
 ### Passos p/ deploy / Instruções de uso 
 
-alias meltano="./meltanobanvic.sh"
-
+0. Requirements 
+- docker-buildx
+  
 1. Deploy do SERVIDOR BANVIC
 ``` 
 cd postgres_banvic 
 docker compose up -d
 ```
 
-2. Deploy do SERVIDOR AIRFLOW
+1. Deploy do SERVIDOR AIRFLOW
 ```
 cd airflow
 docker compose up -d
 ```
 
 A DAG já está configurada de forma a iniciar e terminar a execução do container meltano, que fará a extração e o carregamento. A pipeline será executada diariamente às 4:35
+
+
+
+###TO-DO 
+* Remover exposiçao de portas desnecessárias.
+* Ver se tem alguma coisa a acrescentar na documentação que tenha sido feito no target-postgres e nos plugins que não tem suporte para definição de config por json. (Acho que está armazenando no postgre interno, pq não inseriu a config no .yml pelo modo interativo) 
