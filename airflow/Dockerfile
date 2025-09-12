@@ -1,7 +1,0 @@
-FROM apache/airflow:3.0.6
-
-USER airflow
-
-RUN pip install --no-cache-dir uv
-
-RUN uv tool install meltano
