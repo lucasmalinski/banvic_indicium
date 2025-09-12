@@ -24,4 +24,4 @@ docker build -t airflow-meltano:latest .
 docker compose up airflow-init
 echo "Esperando airflow-init..."
 sleep 30
-docker compose up -d 
+docker compose up -d docker compose run airflow-cli airflow config list
