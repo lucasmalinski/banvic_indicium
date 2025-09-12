@@ -1,7 +1,7 @@
 meltano/.meltano
 meltano/.env
 meltano/load/data
-meltano/banvic/extract/data
-orientacoes.md
-pipeline.sh
-README.md
+
+
+
+
