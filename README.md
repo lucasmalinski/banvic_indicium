@@ -58,6 +58,3 @@ A DAG já está configurada de forma a iniciar e terminar a execução do contai
 
 
 
-###TO-DO 
-* Remover exposiçao de portas desnecessárias.
-* Ver se tem alguma coisa a acrescentar na documentação que tenha sido feito no target-postgres e nos plugins que não tem suporte para definição de config por json. (Acho que está armazenando no postgre interno, pq não inseriu a config no .yml pelo modo interativo) 
