@@ -2,20 +2,28 @@
 set -e
 
 # Permissões de pastas e environment do airflow
-
+mkdir -p airflow/dags airflow/logs airflow/plugins airflow/config
 echo -e "AIRFLOW_UID=$(id -u)" > airflow/.env
+echo -e "AIRFLOW_UID=$(id -u)" > .env
 
-# BUILD imagem meltano pré-configurada 
-
-docker build -t "meltano-banvic:latest" "meltano_banvic"
-
-# POSTGRES do Banvic
+# POSTGRES - Banvic
 
 docker compose -f postgres_banvic/docker-compose.yml up -d 
 
-# POSTGRES do datawarehouse
+# POSTGRES - datawarehouse
 docker compose -f data_warehouse/docker-compose.yml up -d 
+
+# MELTANO - BUILD imagem meltano pré-configurada 
+docker compose -f meltano_banvic/docker-compose.yml down --volumes --remove-orphans
+docker build -t "meltano-banvic:latest" "meltano_banvic"
 
 # AIRFLOW
 cd airflow
-docker compose up airflow-init --force-recreate && docker compose up -d --force-recreate
+docker compose down --volumes --remove-orphans
+docker compose up airflow-init
+docker compose up -d 
+
+
+
+
+

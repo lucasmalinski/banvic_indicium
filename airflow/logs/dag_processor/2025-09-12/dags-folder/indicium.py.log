@@ -1,0 +1,9 @@
+{"timestamp":"2025-09-12T05:46:20.897423","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:46:53.297734","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:47:23.977444","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:47:54.063510","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:48:24.339659","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:48:55.018075","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:49:25.601761","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:49:56.399848","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-09-12T05:50:27.291324","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/indicium.py","logger":"airflow.models.dagbag.DagBag"}
